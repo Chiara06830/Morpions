@@ -4,13 +4,13 @@ public class Case {
 	//ATTRIBUTS
 	private int x;
 	private int y;
-	private Pion pion; 
+	private String pion; 
 	
 	//CONSTRUCTEURS 
 	public Case(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.pion = null;
+		this.pion = " ";
 	}
 	
 	//GETTERS AND SETTERS
@@ -18,6 +18,6 @@ public class Case {
 	public void setX(int x) {this.x = x;}
 	public int getY() {return y;}
 	public void setY(int y) {this.y = y;}
-	public Pion getPion() {return pion;}
-	public void setPion(Pion p) {this.pion = p;}
+	public String getPion() {return pion;}
+	public void setPion(String p) {this.pion = p;}
 }
