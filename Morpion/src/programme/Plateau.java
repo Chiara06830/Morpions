@@ -18,9 +18,9 @@ public class Plateau {
 	//initialisation plateau
 	private Case [] [] plateau = 
 		{
-			{A3, B3, C3},
-			{A2, B2, C2},
-			{A1, B1, C1}
+			{A3, B3, C3}, // | 0,0 | 2,1 | 2,2 | 
+			{A2, B2, C2}, // | 1,0 | 1,1 | 1,2 | 
+			{A1, B1, C1}  // | 2,0 | 0,1 | 0,2 | 
 		};
 	
 	//CONSTRUCTEUR
@@ -49,16 +49,80 @@ public class Plateau {
 		return res;
 	}
 	
-	public void mettrePion(Case c, int joueur) {
+	public void mettrePion(Case c, Joueur jo) {
 		for (int i=0; i<3; i++) {
 			for (int j=0; j<3; j++) {
 				if (this.plateau[j][i].getX() == c.getX() && this.plateau[j][i].getY() == c.getY()) {
-					if (joueur == 1)
+					if (jo.isCouleur() == true)
 						this.plateau[j][i].setPion("O");
 					else this.plateau[j][i].setPion("X");
 				}
 			}
 		}
+	}
+	
+	public boolean aGagne(Joueur j) {
+		if (j.isCouleur() == true) { //joueur rond
+			if (this.getA3().getPion() == "O") { //depuis haut gauche
+				if (this.getB3().getPion() == "O" && this.getC3().getPion() == "O") // 1ere ligne
+					return true;
+				else if (this.getA2().getPion() == "O" && this.getA1().getPion() == "O") // 1ere colonne
+					return true;
+				else if (this.getB2().getPion() == "O" && this.getC1().getPion() == "O") // diago gauche
+					return true;
+				else return false;
+			}	
+			
+			if (this.getC3().getPion() == "O") { //depuis haut droite 
+				if (this.getB2().getPion() == "O" && this.getA1().getPion() == "O") // diago droite
+					return true;
+				else if (this.getC2().getPion() == "O" && this.getC1().getPion() == "O") // 3eme colonne
+					return true;
+				else return false;
+			}
+			
+			if (this.getA1().getPion() == "O") { //depuis bas gauche
+				if (this.getB1().getPion() == "O" && this.getC1().getPion() == "O") //3eme ligne
+					return true;
+				else return false;
+			}
+			if (this.getB3().getPion() == "O" && this.getB2().getPion() == "O" && this.getB1().getPion() == "O")// 2eme colonne 
+				return true;
+			if (this.getA2().getPion() == "O" && this.getB2().getPion() == "O" && this.getC2().getPion() == "O") // 2eme ligne
+				return false;
+		}
+		
+		if (j.isCouleur() == true) { //joueur croix
+			if (this.getA3().getPion() == "X") { //depuis haut gauche
+				if (this.getB3().getPion() == "X" && this.getC3().getPion() == "X") // 1ere ligne
+					return true;
+				else if (this.getA2().getPion() == "X" && this.getA1().getPion() == "X") // 1ere colonne
+					return true;
+				else if (this.getB2().getPion() == "X" && this.getC1().getPion() == "X") // diago gauche
+					return true;
+				else return false;
+			}	
+			
+			if (this.getC3().getPion() == "X") { //depuis haut droite 
+				if (this.getB2().getPion() == "X" && this.getA1().getPion() == "X") // diago droite
+					return true;
+				else if (this.getC2().getPion() == "X" && this.getC1().getPion() == "X") // 3eme colonne
+					return true;
+				else return false;
+			}
+			
+			if (this.getA1().getPion() == "X") { //depuis bas gauche
+				if (this.getB1().getPion() == "X" && this.getC1().getPion() == "X") //3eme ligne
+					return true;
+				else return false;
+			}
+			if (this.getB3().getPion() == "X" && this.getB2().getPion() == "X" && this.getB1().getPion() == "X")// 2eme colonne 
+				return true;
+			if (this.getA2().getPion() == "X" && this.getB2().getPion() == "X" && this.getC2().getPion() == "X") // 2eme ligne
+				return false;
+		}
+		
+		return false;
 	}
 	
 	//GETTERS AND SETTERS
@@ -83,4 +147,45 @@ public class Plateau {
 
 	public Case[][] getPlateau() {return plateau;}
 	public void setPlateau(Case[][] plateau) {this.plateau = plateau;}
+	
+	/*if (j.isCouleur() == true) { //joueur rond
+			if (this.getA3().getPion() == "O") { //depuis haut gauche
+				if (this.getB3().getPion() == "O" && this.getC3().getPion() == "O")
+					return true;
+				else if (this.getA2().getPion() == "O" && this.getA1().getPion() == "O")
+					return true;
+				else if (this.getB2().getPion() == "O" && this.getC1().getPion() == "O")
+					return true;
+				else return false;
+			}	
+			
+			if (this.getC3().getPion() == "O") { //depuis haut droite 
+				if (this.plateau[2][1].getPion() == "O" && this.plateau[0][0].getPion() == "O")
+					return true;
+				else if (this.plateau[1][1].getPion() == "O" && this.plateau[2][0].getPion() == "O")
+					return true;
+				else if (this.plateau[1][2].getPion() == "O" && this.plateau[0][2].getPion() == "O")
+					return true;
+				else return false;
+			}
+			
+			if (this.plateau[2][0].getPion() == "O") { //depuis bas gauche
+				if (this.plateau[0][1].getPion() == "O" && this.plateau[0][2].getPion() == "O")
+					return true;
+				else if (this.plateau[1][0].getPion() == "O" && this.plateau[0][0].getPion() == "O")
+					return true;
+				else if (this.plateau[1][1].getPion() == "O" && this.plateau[2][2].getPion() == "O")
+					return true;
+				else return false;
+			}
+			
+			if (this.plateau[0][2].getPion() == "O") { //depuis bas droite
+				if (this.plateau[0][1].getPion() == "O" && this.plateau[2][0].getPion() == "O")
+					return true;
+				else if (this.plateau[1][2].getPion() == "O" && this.plateau[2][2].getPion() == "O")
+					return true;
+				else if (this.plateau[1][1].getPion() == "O" && this.plateau[0][0].getPion() == "O")
+					return true;
+				else return false;
+			}*/
 }
