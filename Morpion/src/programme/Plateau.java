@@ -92,7 +92,7 @@ public class Plateau {
 				return false;
 		}
 		
-		if (j.isCouleur() == true) { //joueur croix
+		if (j.isCouleur() == false) { //joueur croix
 			if (this.getA3().getPion() == "X") { //depuis haut gauche
 				if (this.getB3().getPion() == "X" && this.getC3().getPion() == "X") // 1ere ligne
 					return true;
