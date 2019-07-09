@@ -23,6 +23,13 @@ public class Plateau {
 			{A1, B1, C1}  // | 2,0 | 0,1 | 0,2 | 
 		};
 	
+	private String [][] code = 
+		{
+			{"A3", "B3", "C3"},
+			{"A2", "B2", "C2"},
+			{"A1", "B1", "C1"}
+		};
+	
 	//CONSTRUCTEUR
 	public Plateau () {}
 	
@@ -125,6 +132,19 @@ public class Plateau {
 		return false;
 	}
 	
+	public Case traduction (String s) {
+		Case res = null;
+		for (int i=0; i<3; i++) {
+			for (int j=0; j<3; j++) {
+				if (this.code[i][j] == s) {
+					System.out.println("victoire");
+					res = this.plateau[i][j];
+				}
+			}
+		}
+		return res;
+	}
+	
 	//GETTERS AND SETTERS
 	public Case getA3() {return A3;}
 	public void setA3(Case a3) {A3 = a3;}
@@ -147,45 +167,4 @@ public class Plateau {
 
 	public Case[][] getPlateau() {return plateau;}
 	public void setPlateau(Case[][] plateau) {this.plateau = plateau;}
-	
-	/*if (j.isCouleur() == true) { //joueur rond
-			if (this.getA3().getPion() == "O") { //depuis haut gauche
-				if (this.getB3().getPion() == "O" && this.getC3().getPion() == "O")
-					return true;
-				else if (this.getA2().getPion() == "O" && this.getA1().getPion() == "O")
-					return true;
-				else if (this.getB2().getPion() == "O" && this.getC1().getPion() == "O")
-					return true;
-				else return false;
-			}	
-			
-			if (this.getC3().getPion() == "O") { //depuis haut droite 
-				if (this.plateau[2][1].getPion() == "O" && this.plateau[0][0].getPion() == "O")
-					return true;
-				else if (this.plateau[1][1].getPion() == "O" && this.plateau[2][0].getPion() == "O")
-					return true;
-				else if (this.plateau[1][2].getPion() == "O" && this.plateau[0][2].getPion() == "O")
-					return true;
-				else return false;
-			}
-			
-			if (this.plateau[2][0].getPion() == "O") { //depuis bas gauche
-				if (this.plateau[0][1].getPion() == "O" && this.plateau[0][2].getPion() == "O")
-					return true;
-				else if (this.plateau[1][0].getPion() == "O" && this.plateau[0][0].getPion() == "O")
-					return true;
-				else if (this.plateau[1][1].getPion() == "O" && this.plateau[2][2].getPion() == "O")
-					return true;
-				else return false;
-			}
-			
-			if (this.plateau[0][2].getPion() == "O") { //depuis bas droite
-				if (this.plateau[0][1].getPion() == "O" && this.plateau[2][0].getPion() == "O")
-					return true;
-				else if (this.plateau[1][2].getPion() == "O" && this.plateau[2][2].getPion() == "O")
-					return true;
-				else if (this.plateau[1][1].getPion() == "O" && this.plateau[0][0].getPion() == "O")
-					return true;
-				else return false;
-			}*/
 }
