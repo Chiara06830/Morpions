@@ -13,6 +13,11 @@ public class Case {
 		this.pion = " ";
 	}
 	
+	//METHODE
+	public String toString () {
+		return "(" + this.x + "; " + this.y + ")";
+	}
+	
 	//GETTERS AND SETTERS
 	public int getX() {return x;}
 	public void setX(int x) {this.x = x;}
