@@ -138,7 +138,7 @@ public class Plateau {
 			for (int j=0; j<3; j++) {
 				if (this.code[i][j] == s) {
 					System.out.println("victoire");
-					res = this.plateau[i][j];
+					res = new Case (i, j);
 				}
 			}
 		}
