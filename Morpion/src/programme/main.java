@@ -23,6 +23,7 @@ public class main {
 		System.out.println("Le jeu peut maintenant commencé !!");
 		System.out.println();
 		
+		//jouer la partie
 		boolean enJeu = true;
 		while (enJeu == true) {
 			System.out.println(plateau.affichage());
@@ -34,6 +35,16 @@ public class main {
 			String c = sc.nextLine();
 			System.out.println(plateau.traduction(c));
 			//plateau.mettrePion(plateau.traduction(c), j1);
+			
+			//si il y a victoire d'un des deux joueurs
+			if (plateau.aGagne(j1)) {
+				enJeu = false;
+				System.out.println(j1.getNom() + " à gagné");
+			}
+			if (plateau.aGagne(j2)) {
+				enJeu = false;
+				System.out.println(j2.getNom() + " à gagné");
+			}
 		}
 			
 		sc.close();
