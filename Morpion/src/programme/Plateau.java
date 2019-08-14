@@ -1,5 +1,9 @@
 package programme;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
 public class Plateau {
 	//ATTRIBUTS
 	//initialisation case
@@ -7,20 +11,20 @@ public class Plateau {
 	private Case A2 = new Case(1, 0);
 	private Case A1 = new Case(2, 0);
 	
-	private Case B1 = new Case(0, 1);
+	private Case B1 = new Case(2, 1);
 	private Case B2 = new Case(1, 1);
-	private Case B3 = new Case(2, 1);
+	private Case B3 = new Case(0, 1);
 	
-	private Case C1 = new Case(0, 2);
+	private Case C1 = new Case(2, 2);
 	private Case C2 = new Case(1, 2);
-	private Case C3 = new Case(2, 2);
+	private Case C3 = new Case(0, 2);
 	
 	//initialisation plateau
 	private Case [] [] plateau = 
 		{
-			{A3, B3, C3}, // | 0,0 | 2,1 | 2,2 | 
+			{A3, B3, C3}, // | 0,0 | 0,1 | 0,2 |
 			{A2, B2, C2}, // | 1,0 | 1,1 | 1,2 | 
-			{A1, B1, C1}  // | 2,0 | 0,1 | 0,2 | 
+			{A1, B1, C1}  // | 2,0 | 2,1 | 2,2 | 
 		};
 	
 	private String [][] code = 
@@ -132,17 +136,32 @@ public class Plateau {
 		return false;
 	}
 	
-	public Case traduction (String s) {
-		Case res = null;
+	public Case traduction (String s){
 		for (int i=0; i<3; i++) {
 			for (int j=0; j<3; j++) {
-				if (this.code[i][j] == s) {
-					System.out.println("victoire");
-					res = new Case (i, j);
+				if (this.code[i][j].equals(s)) {
+					return new Case (i, j);
 				}
 			}
 		}
-		return res;
+		return null;
+	}
+	
+	public void jouer (Joueur j) {
+		String c;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Tour de " + j.getNom());
+		System.out.println();
+		do { //tant que la saisie n'est pas bonne
+			System.out.println("Entrez les coordonnées de la case dans laquel vous voulez jouer (ex : A1)");
+			c = sc.nextLine();
+			Case trad = traduction(c);
+			if (trad == null || trad.getPion() == "O" || trad.getPion() == "X") {
+				System.err.println(("erreure de saisie"));
+				System.out.println();
+			}
+		} while (this.traduction(c) == null);
+		this.mettrePion(this.traduction(c), j);
 	}
 	
 	//GETTERS AND SETTERS
