@@ -3,7 +3,7 @@ package programme;
 public class Joueur {
 	//ATTRIBUTS 
 	private String nom;
-	private boolean couleur;
+	private boolean couleur; //true = O, false = X
 	
 	//CONSTRUCTEURS 
 	public Joueur (String nom, boolean couleur) {

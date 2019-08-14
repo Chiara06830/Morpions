@@ -7,6 +7,10 @@ public class Case {
 	private String pion; 
 	
 	//CONSTRUCTEURS 
+	public Case () {
+		
+	}
+	
 	public Case(int x, int y) {
 		this.x = x;
 		this.y = y;

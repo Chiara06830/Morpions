@@ -30,9 +30,8 @@ class testGeneraux {
 			for (int j=0; j<3; j++) {
 				Case c = new Case (i, j);
 				p.mettrePion(c, jo);
-				assertEquals("O", );
+				assertEquals("O", c.getPion());
 			}
 		}
 	}
-
 }
