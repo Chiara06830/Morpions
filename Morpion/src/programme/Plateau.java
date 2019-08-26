@@ -64,75 +64,46 @@ public class Plateau {
 		for (int i=0; i<3; i++) {
 			for (int j=0; j<3; j++) {
 				if (this.plateau[j][i].getX() == c.getX() && this.plateau[j][i].getY() == c.getY()) {
-					if (jo.isCouleur() == true)
-						this.plateau[j][i].setPion("O");
-					else this.plateau[j][i].setPion("X");
+					if (jo.isCouleur())
+						this.plateau[j][i] = new Case (i, j, "O");
+					else this.plateau[j][i] = new Case (i, j, "X");
 				}
 			}
 		}
 	}
 	
 	public boolean aGagne(Joueur j) {
-		if (j.isCouleur() == true) { //joueur rond
-			if (this.getA3().getPion() == "O") { //depuis haut gauche
-				if (this.getB3().getPion() == "O" && this.getC3().getPion() == "O") // 1ere ligne
+		String lettre;
+		if (j.isCouleur()) { //joueur rond
+			lettre = "O";
+		}else lettre = "X";
+			if (this.getA3().getPion() == lettre) { //depuis haut gauche
+				if (this.getB3().getPion() == lettre && this.getC3().getPion() == lettre) // 1ere ligne
 					return true;
-				else if (this.getA2().getPion() == "O" && this.getA1().getPion() == "O") // 1ere colonne
+				else if (this.getA2().getPion() == lettre && this.getA1().getPion() == lettre) // 1ere colonne
 					return true;
-				else if (this.getB2().getPion() == "O" && this.getC1().getPion() == "O") // diago gauche
-					return true;
-				else return false;
-			}	
-			
-			if (this.getC3().getPion() == "O") { //depuis haut droite 
-				if (this.getB2().getPion() == "O" && this.getA1().getPion() == "O") // diago droite
-					return true;
-				else if (this.getC2().getPion() == "O" && this.getC1().getPion() == "O") // 3eme colonne
-					return true;
-				else return false;
-			}
-			
-			if (this.getA1().getPion() == "O") { //depuis bas gauche
-				if (this.getB1().getPion() == "O" && this.getC1().getPion() == "O") //3eme ligne
-					return true;
-				else return false;
-			}
-			if (this.getB3().getPion() == "O" && this.getB2().getPion() == "O" && this.getB1().getPion() == "O")// 2eme colonne 
-				return true;
-			if (this.getA2().getPion() == "O" && this.getB2().getPion() == "O" && this.getC2().getPion() == "O") // 2eme ligne
-				return false;
-		}
-		
-		if (j.isCouleur() == false) { //joueur croix
-			if (this.getA3().getPion() == "X") { //depuis haut gauche
-				if (this.getB3().getPion() == "X" && this.getC3().getPion() == "X") // 1ere ligne
-					return true;
-				else if (this.getA2().getPion() == "X" && this.getA1().getPion() == "X") // 1ere colonne
-					return true;
-				else if (this.getB2().getPion() == "X" && this.getC1().getPion() == "X") // diago gauche
+				else if (this.getB2().getPion() == lettre && this.getC1().getPion() == lettre) // diago gauche
 					return true;
 				else return false;
 			}	
 			
-			if (this.getC3().getPion() == "X") { //depuis haut droite 
-				if (this.getB2().getPion() == "X" && this.getA1().getPion() == "X") // diago droite
+			if (this.getC3().getPion() == lettre) { //depuis haut droite 
+				if (this.getB2().getPion() == lettre && this.getA1().getPion() == lettre) // diago droite
 					return true;
-				else if (this.getC2().getPion() == "X" && this.getC1().getPion() == "X") // 3eme colonne
+				else if (this.getC2().getPion() == lettre && this.getC1().getPion() == lettre) // 3eme colonne
 					return true;
 				else return false;
 			}
 			
-			if (this.getA1().getPion() == "X") { //depuis bas gauche
-				if (this.getB1().getPion() == "X" && this.getC1().getPion() == "X") //3eme ligne
+			if (this.getA1().getPion() == lettre) { //depuis bas gauche
+				if (this.getB1().getPion() == lettre && this.getC1().getPion() == lettre) //3eme ligne
 					return true;
 				else return false;
 			}
-			if (this.getB3().getPion() == "X" && this.getB2().getPion() == "X" && this.getB1().getPion() == "X")// 2eme colonne 
+			if (this.getB3().getPion() == lettre && this.getB2().getPion() == lettre && this.getB1().getPion() == lettre)// 2eme colonne 
 				return true;
-			if (this.getA2().getPion() == "X" && this.getB2().getPion() == "X" && this.getC2().getPion() == "X") // 2eme ligne
+			if (this.getA2().getPion() == lettre && this.getB2().getPion() == lettre && this.getC2().getPion() == lettre) // 2eme ligne
 				return false;
-		}
-		
 		return false;
 	}
 	
@@ -156,7 +127,7 @@ public class Plateau {
 			System.out.println("Entrez les coordonnées de la case dans laquel vous voulez jouer (ex : A1)");
 			c = sc.nextLine();
 			Case trad = traduction(c);
-			if (trad == null || trad.getPion() == "O" || trad.getPion() == "X") {
+			if (trad == null || trad.getPion() == "O" || trad.getPion() == "X") { //si erreure de saisie 
 				System.err.println(("erreure de saisie"));
 				System.out.println();
 			}

@@ -17,9 +17,15 @@ public class Case {
 		this.pion = " ";
 	}
 	
+	public Case(int x, int y, String pion) {
+		this.x = x;
+		this.y = y;
+		this.pion = pion;
+	}
+	
 	//METHODE
 	public String toString () {
-		return "(" + this.x + "; " + this.y + ")";
+		return "(" + this.x + "; " + this.y + ") de couleur " + this.getPion();
 	}
 	
 	//GETTERS AND SETTERS
