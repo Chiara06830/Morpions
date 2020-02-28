@@ -1,16 +1,10 @@
-package programme;
-
 public class Case {
 	//ATTRIBUTS
 	private int x;
 	private int y;
 	private String pion; 
 	
-	//CONSTRUCTEURS 
-	public Case () {
-		
-	}
-	
+	//CONSTRUCTEURS
 	public Case(int x, int y) {
 		this.x = x;
 		this.y = y;

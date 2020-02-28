@@ -1,5 +1,3 @@
-package programme;
-
 public class Joueur {
 	//ATTRIBUTS 
 	private String nom;

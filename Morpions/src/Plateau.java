@@ -1,5 +1,3 @@
-package programme;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Scanner;
@@ -51,7 +49,7 @@ public class Plateau {
 				res += " | ";
 			}
 			res += "\n";
-			res += "   -------------"; //ligne de séprations
+			res += "   -------------"; //ligne de sï¿½prations
 			res += "\n";
 			chiffres --; 
 		}
@@ -77,32 +75,32 @@ public class Plateau {
 		if (j.isCouleur()) { //joueur rond
 			lettre = "O";
 		}else lettre = "X";
-			if (this.getA3().getPion() == lettre) { //depuis haut gauche
-				if (this.getB3().getPion() == lettre && this.getC3().getPion() == lettre) // 1ere ligne
+			if (this.getA3().getPion().equals(lettre)) { //depuis haut gauche
+				if (this.getB3().getPion().equals(lettre) && this.getC3().getPion().equals(lettre)) // 1ere ligne
 					return true;
-				else if (this.getA2().getPion() == lettre && this.getA1().getPion() == lettre) // 1ere colonne
+				else if (this.getA2().getPion().equals(lettre) && this.getA1().getPion().equals(lettre)) // 1ere colonne
 					return true;
-				else if (this.getB2().getPion() == lettre && this.getC1().getPion() == lettre) // diago gauche
+				else if (this.getB2().getPion().equals(lettre) && this.getC1().getPion().equals(lettre)) // diago gauche
 					return true;
 				else return false;
 			}	
 			
-			if (this.getC3().getPion() == lettre) { //depuis haut droite 
-				if (this.getB2().getPion() == lettre && this.getA1().getPion() == lettre) // diago droite
+			if (this.getC3().getPion().equals(lettre)) { //depuis haut droite
+				if (this.getB2().getPion().equals(lettre) && this.getA1().getPion().equals(lettre)) // diago droite
 					return true;
-				else if (this.getC2().getPion() == lettre && this.getC1().getPion() == lettre) // 3eme colonne
+				else if (this.getC2().getPion().equals(lettre) && this.getC1().getPion().equals(lettre)) // 3eme colonne
 					return true;
 				else return false;
 			}
 			
-			if (this.getA1().getPion() == lettre) { //depuis bas gauche
-				if (this.getB1().getPion() == lettre && this.getC1().getPion() == lettre) //3eme ligne
+			if (this.getA1().getPion().equals(lettre)) { //depuis bas gauche
+				if (this.getB1().getPion().equals(lettre) && this.getC1().getPion().equals(lettre)) //3eme ligne
 					return true;
 				else return false;
 			}
-			if (this.getB3().getPion() == lettre && this.getB2().getPion() == lettre && this.getB1().getPion() == lettre)// 2eme colonne 
+			if (this.getB3().getPion().equals(lettre) && this.getB2().getPion().equals(lettre) && this.getB1().getPion().equals(lettre))// 2eme colonne
 				return true;
-			if (this.getA2().getPion() == lettre && this.getB2().getPion() == lettre && this.getC2().getPion() == lettre) // 2eme ligne
+			if (this.getA2().getPion().equals(lettre) && this.getB2().getPion().equals(lettre) && this.getC2().getPion().equals(lettre)) // 2eme ligne
 				return false;
 		return false;
 	}
@@ -124,15 +122,35 @@ public class Plateau {
 		System.out.println("Tour de " + j.getNom());
 		System.out.println();
 		do { //tant que la saisie n'est pas bonne
-			System.out.println("Entrez les coordonnées de la case dans laquel vous voulez jouer (ex : A1)");
+			System.out.println("Entrez les coordonnÃ©es de la case dans laquel vous voulez jouer (ex : A1)");
 			c = sc.nextLine();
 			Case trad = traduction(c);
-			if (trad == null || trad.getPion() == "O" || trad.getPion() == "X") { //si erreure de saisie 
+			if (trad == null || trad.getPion().equals("O") || trad.getPion().equals("X")) { //si erreure de saisie
 				System.err.println(("erreure de saisie"));
 				System.out.println();
 			}
 		} while (this.traduction(c) == null);
 		this.mettrePion(this.traduction(c), j);
+	}
+
+	public boolean partieFini(){
+		int nbCaseVide = 0;
+		for (int i=0; i<3; i++){
+			for (int j=0; j<3; j++){
+				if (this.getPlateau()[i][j].equals(" ")){
+					nbCaseVide++;
+				}
+			}
+		}
+
+		if (nbCaseVide == 9)
+			return true;
+		else
+			return false;
+	}
+
+	public void annulerCoup(Case c){
+		this.getPlateau()[c.getY()][c.getX()] = new Case(c.getX(), c.getY(), " ") ;
 	}
 	
 	//GETTERS AND SETTERS
